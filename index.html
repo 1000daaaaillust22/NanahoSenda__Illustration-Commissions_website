@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>センダイラスト｜イラスト制作</title>
+    <!-- Google Fonts for Logo -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        orange: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316',
+                            600: '#ea580c',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Helvetica Neue"', 'Arial', '"Hiragino Kaku Gothic ProN"', '"Hiragino Sans"', 'Meiryo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Details & Summary Styles */
+        details > summary {
+            list-style: none;
+            cursor: pointer;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary ~ * {
+            animation: fadeInDown 0.3s ease-in-out;
+        }
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom font class for logo */
+        .font-logo {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.02em;
+        }
+        
+        /* Custom radio and checkbox styles for form */
+        .custom-radio:checked + div {
+            border-color: #f97316;
+            background-color: #fff7ed;
+        }
+        .custom-radio:checked + div .radio-icon {
+            color: #f97316;
+            background-color: #f97316;
+            border-color: #f97316;
+        }
+        .custom-checkbox:checked + div {
+            border-color: #f97316;
+            background-color: #fff7ed;
+        }
+        .custom-checkbox:checked + div .checkbox-icon {
+            background-color: #f97316;
+            border-color: #f97316;
+        }
+        .custom-checkbox:checked + div .checkbox-icon::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 4px;
+            height: 8px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        /* Safe area padding for floating bar on mobile */
+        .pb-safe {
+            padding-bottom: 1rem;
+        }
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .pb-safe {
+                padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800 bg-gray-50 font-sans leading-relaxed tracking-wide">
+
+    <!-- Header / Navigation -->
+    <header class="fixed w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="#" class="text-xl font-extrabold font-logo text-gray-900">
+                    Senda<span class="text-orange-500">Illust</span>
+                </a>
+
+                <!-- PC Nav -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="text-sm font-medium text-gray-600 hover:text-orange-500 transition">イラストについて</a>
+                    <a href="#plans" class="text-sm font-medium text-gray-600 hover:text-orange-500 transition">プラン・料金</a>
+                    <a href="#payment" class="text-sm font-medium text-gray-600 hover:text-orange-500 transition">お支払い</a>
+                    <a href="#terms" class="text-sm font-medium text-gray-600 hover:text-orange-500 transition">確認事項</a>
+                    <a href="#contact" class="bg-orange-500 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-orange-600 transition shadow-sm">ご依頼・お見積り</a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600 focus:outline-none">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="#about" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 border-b border-gray-50">イラストについて</a>
+                <a href="#plans" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 border-b border-gray-50">プラン・料金</a>
+                <a href="#payment" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 border-b border-gray-50">お支払い</a>
+                <a href="#terms" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 border-b border-gray-50">確認事項</a>
+                <a href="#contact" class="mobile-link mt-4 inline-block text-center bg-orange-500 text-white px-5 py-3 rounded-full text-base font-bold shadow-sm">ご依頼・お見積り</a>
+            </div>
+        </div>
+    </header>
+    <div class="h-16"></div> <!-- Spacer for fixed header -->
+
+    <!-- ① ファーストビュー -->
+    <section class="relative bg-white pt-20 pb-24 lg:pt-32 lg:pb-40 overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-orange-50 opacity-50 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-gray-50 opacity-50 blur-3xl"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+            <h1 class="text-xl md:text-2xl font-bold text-gray-500 leading-tight mb-4 tracking-tight">
+                センダイラスト
+                <span class="text-4xl md:text-5xl font-bold text-gray-900 block mt-2">イラスト制作</span>
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl font-bold text-orange-500 mb-8 leading-relaxed px-2">
+                MV・キービジュアル・書籍装画など、<br class="md:hidden">世界観を伝えるビジュアル制作を行っています。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="#plans" class="w-full sm:w-auto bg-gray-900 text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition shadow-md text-center">
+                    個人様はこちら
+                </a>
+                <a href="#contact" class="w-full sm:w-auto bg-orange-500 text-white px-8 py-4 rounded-full font-bold hover:bg-orange-600 transition shadow-md text-center flex justify-center items-center">
+                    企業・法人様はこちら <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ② 制作するイラストについて -->
+    <section id="about" class="py-16 md:py-24 bg-gray-50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 relative inline-block">
+                    制作するイラストについて
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4 w-12 h-1 bg-orange-500 rounded-full"></span>
+                </h2>
+            </div>
+
+            <!-- 表デザイン -->
+            <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-8">
+                <table class="w-full text-left text-sm md:text-base">
+                    <tbody class="divide-y divide-gray-100">
+                        <tr><td class="py-4 px-6">伝えたい雰囲気に合わせた色づかいを大切に、一枚で世界観やストーリーが伝わるイラスト制作を心がけています。</td></tr>
+                        <tr><td class="py-4 px-6 bg-gray-50/50">オリジナル楽曲や歌ってみた動画のMVイラストを中心に、楽曲の世界観やストーリーをもとにしたビジュアル制作を行ってきました。</td></tr>
+                        <tr><td class="py-4 px-6">また、小説コンテストのキービジュアル制作にも携わり、一枚で印象や物語性を伝える表現を得意としています。</td></tr>
+                        <tr><td class="py-4 px-6 bg-gray-50/50">書籍装画やキービジュアルなどの制作にも対応可能です。</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-orange-50 border border-orange-100 rounded-xl overflow-hidden mb-10 text-sm">
+                <div class="bg-orange-100/50 px-5 py-3 font-bold text-orange-800 flex items-center border-b border-orange-100">
+                    <i data-lucide="alert-circle" class="w-5 h-5 mr-2"></i> 注意書き
+                </div>
+                <table class="w-full text-left text-orange-800">
+                    <tbody class="divide-y divide-orange-100">
+                        <tr class="bg-orange-50/30">
+                            <td class="py-3 px-5">AIを用いた画像生成は一切行っておりません。すべて手作業での制作となります。</td>
+                        </tr>
+                        <tr class="bg-orange-100/40">
+                            <td class="py-3 px-5">過度な性描写・グロテスクな表現を含むご依頼はお受けできません。</td>
+                        </tr>
+                        <tr class="bg-orange-50/30">
+                            <td class="py-3 px-5">版権キャラクター（二次創作）のご依頼は、公式のガイドラインで許可されている場合を除きお断りしております。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center mb-4">
+                <a href="https://enraise.net/portfolio/1000_daaaa/creators?t=portfolio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-white border-2 border-gray-900 text-gray-900 px-8 py-4 rounded-full font-bold hover:bg-gray-900 hover:text-white transition duration-300 w-full sm:w-auto shadow-sm">
+                    制作したイラストを見る <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ③ プラン一覧 -->
+    <section id="plans" class="py-16 md:py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 relative inline-block">
+                    プラン一覧
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4 w-12 h-1 bg-orange-500 rounded-full"></span>
+                </h2>
+            </div>
+            
+            <div class="text-center mb-10 md:mb-16">
+                <p class="text-sm font-bold text-gray-700 mb-4 bg-gray-100 inline-block px-4 py-2 rounded-full">こちらは個人様向けの料金になります。</p>
+                <br>
+                <a href="#contact" class="inline-flex items-center justify-center bg-gray-900 text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-sm hover:bg-gray-800 transition">
+                    企業・法人様はこちらからお問い合わせください！ <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                </a>
+            </div>
+
+            <!-- スマホでは縦並び、PCでは3つ横並びのグリッド -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-sm md:max-w-none mx-auto">
+                <!-- Card 1 -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 flex flex-col items-center text-center shadow-sm hover:shadow-md transition">
+                    <div class="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center mb-4 md:mb-6 text-orange-500">
+                        <i data-lucide="image" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">おてがるプラン</h3>
+                    <p class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8">15,000円<span class="text-sm md:text-lg text-gray-500 font-normal">〜</span></p>
+                    <button onclick="openDetail('detail-basic')" class="mt-auto w-full py-3 bg-gray-50 hover:bg-gray-100 text-gray-800 rounded-xl font-bold text-sm transition border border-gray-200">
+                        詳細を見る
+                    </button>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 flex flex-col items-center text-center shadow-sm hover:shadow-md transition">
+                    <div class="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center mb-4 md:mb-6 text-orange-500">
+                        <i data-lucide="layers" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">スタンダードプラン</h3>
+                    <p class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8">35,000円<span class="text-sm md:text-lg text-gray-500 font-normal">〜</span></p>
+                    <button onclick="openDetail('detail-standard')" class="mt-auto w-full py-3 bg-gray-50 hover:bg-gray-100 text-gray-800 rounded-xl font-bold text-sm transition border border-gray-200">
+                        詳細を見る
+                    </button>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 flex flex-col items-center text-center shadow-sm hover:shadow-md transition">
+                    <div class="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center mb-4 md:mb-6 text-orange-500">
+                        <i data-lucide="star" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3">プレミアムプラン</h3>
+                    <p class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8">60,000円<span class="text-sm md:text-lg text-gray-500 font-normal">〜</span></p>
+                    <button onclick="openDetail('detail-premium')" class="mt-auto w-full py-3 bg-gray-50 hover:bg-gray-100 text-gray-800 rounded-xl font-bold text-sm transition border border-gray-200">
+                        詳細を見る
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ④ プラン詳細（アコーディオン） -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 space-y-6">
+            
+            <!-- おてがるプラン -->
+            <details id="detail-basic" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden group" open>
+                <summary class="px-6 py-5 flex justify-between items-center bg-white hover:bg-gray-50 transition">
+                    <h3 class="text-lg font-bold flex items-center">
+                        <span class="w-2 h-6 bg-orange-500 rounded-full mr-3"></span>
+                        おてがるプラン
+                    </h3>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300 group-open:rotate-180"></i>
+                </summary>
+                <div class="px-6 pb-8 pt-2 border-t border-gray-100">
+                    <h4 class="font-bold text-xl mb-2 text-gray-900">［個人様］15,000円〜</h4>
+                    <p class="text-sm text-gray-600 mb-6">手軽に高品質なキャラクターイラストが欲しい方向け。</p>
+                    
+                    <p class="font-bold text-sm text-gray-800 mb-2">基本料金に含まれるもの</p>
+                    <table class="w-full text-left text-sm border border-gray-200 rounded-lg overflow-hidden mb-4 bg-white">
+                        <tbody class="divide-y divide-gray-100">
+                            <tr><td class="py-2.5 px-4"><span class="text-orange-500 font-bold mr-2">○</span>PSD/PNG形式納品</td></tr>
+                            <tr><td class="py-2.5 px-4 bg-gray-50/50"><span class="text-orange-500 font-bold mr-2">○</span>描写範囲：バストアップ（人物1人）</td></tr>
+                            <tr><td class="py-2.5 px-4"><span class="text-orange-500 font-bold mr-2">○</span>表情差分：2種（通常 ＋ 1種）</td></tr>
+                            <tr><td class="py-2.5 px-4 bg-gray-50/50"><span class="text-orange-500 font-bold mr-2">○</span>背景：無し または 単色・透過などの簡易なもの</td></tr>
+                            <tr><td class="py-2.5 px-4"><span class="text-orange-500 font-bold mr-2">○</span>簡単な小物（1点まで）</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p class="font-bold text-sm text-gray-800 mb-2">オプション追加料金が必要なもの</p>
+                    <div class="text-sm text-gray-600 border border-gray-200 rounded-lg p-4 bg-white leading-relaxed">
+                        人物追加、差分追加、背景、複雑な装飾・小物、衣装差分、キャラクターデザイン料、著作権譲渡、実績非公開
+                    </div>
+                </div>
+            </details>
+
+            <!-- スタンダードプラン -->
+            <details id="detail-standard" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden group" open>
+                <summary class="px-6 py-5 flex justify-between items-center bg-white hover:bg-gray-50 transition">
+                    <h3 class="text-lg font-bold flex items-center">
+                        <span class="w-2 h-6 bg-orange-500 rounded-full mr-3"></span>
+                        スタンダードプラン
+                    </h3>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300 group-open:rotate-180"></i>
+                </summary>
+                <div class="px-6 pb-8 pt-2 border-t border-gray-100">
+                    <h4 class="font-bold text-xl mb-1 text-gray-900">［個人様］35,000円〜</h4>
+                    <p class="text-xs text-orange-600 font-bold mb-3">※カスタマイズにより最小25,000円〜</p>
+                    <p class="text-sm text-gray-600 mb-6">ポーズや背景にこだわり、SNSのヘッダーや動画の1シーンなどに使いやすいプランです。</p>
+                    
+                    <p class="font-bold text-sm text-gray-800 mb-2">基本料金に含まれるもの</p>
+                    <table class="w-full text-left text-sm border border-gray-200 rounded-lg overflow-hidden mb-4 bg-white">
+                        <tbody class="divide-y divide-gray-100">
+                            <tr><td class="py-2.5 px-4"><span class="text-orange-500 font-bold mr-2">○</span>PSD/PNG形式納品</td></tr>
+                            <tr><td class="py-2.5 px-4 bg-gray-50/50"><span class="text-orange-500 font-bold mr-2">○</span>描写範囲：ウエストアップまで（人物1人）</td></tr>
+                            <tr><td class="py-2.5 px-4"><span class="text-orange-500 font-bold mr-2">○</span>表情差分：3種（通常 ＋ 2種）</td></tr>
+                            <tr><td class="py-2.5 px-4 bg-gray-50/50"><span class="text-orange-500 font-bold mr-2">○</span>ポーズ差分：1種（腕の動き、小物の有無など軽微なもの）</td></tr>
+                            <tr><td class="py-2.5 px-4"><span class="text-orange-500 font-bold mr-2">○</span>背景：雲と空、花、シンプルな室内、エフェクトなど</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p class="font-bold text-sm text-gray-800 mb-2">オプション追加料金が必要なもの</p>
+                    <div class="text-sm text-gray-600 border border-gray-200 rounded-lg p-4 bg-white leading-relaxed">
+                        人物追加、差分追加、複雑な装飾・小物、衣装差分、キャラクターデザイン料、著作権譲渡、実績非公開
+                    </div>
+                </div>
+            </details>
+
+            <!-- プレミアムプラン -->
+            <details id="detail-premium" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden group" open>
+                <summary class="px-6 py-5 flex justify-between items-center bg-white hover:bg-gray-50 transition">
+                    <h3 class="text-lg font-bold flex items-center">
+                        <span class="w-2 h-6 bg-orange-500 rounded-full mr-3"></span>
+                        プレミアムプラン
+                    </h3>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300 group-open:rotate-180"></i>
+                </summary>
+                <div class="px-6 pb-8 pt-2 border-t border-gray-100">
+                    <h4 class="font-bold text-xl mb-1 text-gray-900">［個人様］60,000円〜</h4>
+                    <p class="text-xs text-orange-600 font-bold mb-3">※カスタマイズにより最小40,000円〜</p>
+                    <p class="text-sm text-gray-600 mb-6">キャラクターの全身と描き込まれた背景で、世界観を凝縮した一枚絵を制作します。</p>
+                    
+                    <p class="font-bold text-sm text-gray-800 mb-2">基本料金に含まれるもの</p>
+                    <table class="w-full text-left text-sm border border-gray-200 rounded-lg overflow-hidden mb-4 bg-white">
+                        <tbody class="divide-y divide-gray-100">
+                            <tr><td class="py-2.5 px-4"><span class="text-orange-500 font-bold mr-2">○</span>PSD/PNG形式納品</td></tr>
+                            <tr><td class="py-2.5 px-4 bg-gray-50/50"><span class="text-orange-500 font-bold mr-2">○</span>描写範囲：全身まで対応（人物1人）</td></tr>
+                            <tr><td class="py-2.5 px-4"><span class="text-orange-500 font-bold mr-2">○</span>表情差分：3種（通常 ＋ 2種）</td></tr>
+                            <tr><td class="py-2.5 px-4 bg-gray-50/50"><span class="text-orange-500 font-bold mr-2">○</span>ポーズ差分：1種（重心の変化、座り・立ちの切り替えなど大きな動き）</td></tr>
+                            <tr><td class="py-2.5 px-4"><span class="text-orange-500 font-bold mr-2">○</span>背景：パースのついた街並み、自然、小物の多い部屋など</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p class="font-bold text-sm text-gray-800 mb-2">オプション追加料金が必要なもの</p>
+                    <div class="text-sm text-gray-600 border border-gray-200 rounded-lg p-4 bg-white leading-relaxed">
+                        人物追加、差分追加、複雑な装飾・小物、衣装差分、キャラクターデザイン料、著作権譲渡、実績非公開
+                    </div>
+                </div>
+            </details>
+            
+            <div class="text-center pt-4">
+                <a href="#contact" class="inline-block bg-white text-orange-500 border-2 border-orange-500 hover:bg-orange-50 px-8 py-3 rounded-full font-bold transition shadow-sm">自分に合うプランを相談する</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ⑤ オプション一覧 -->
+    <section id="options" class="py-16 md:py-24 bg-white border-t border-gray-100">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-bold text-gray-900 relative inline-block">
+                    オプション一覧
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4 w-12 h-1 bg-orange-500 rounded-full"></span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 基本オプション -->
+                <div class="border border-gray-200 rounded-xl p-6 shadow-sm flex justify-between items-center bg-gray-50/50">
+                    <h3 class="font-bold text-gray-900">人物追加（1人につき）</h3>
+                    <p class="font-bold text-orange-500">+10,000円〜</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-xl p-6 shadow-sm flex justify-between items-center bg-gray-50/50">
+                    <h3 class="font-bold text-gray-900">表情差分</h3>
+                    <p class="font-bold text-orange-500">+1,000円〜</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-xl p-6 shadow-sm flex justify-between items-center bg-gray-50/50">
+                    <h3 class="font-bold text-gray-900">ポーズをもう1つ作る</h3>
+                    <p class="font-bold text-orange-500">+8,000円〜</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-xl p-6 shadow-sm flex flex-col justify-center bg-gray-50/50">
+                    <div class="flex justify-between items-center mb-1">
+                        <h3 class="font-bold text-gray-900">複雑な装飾・小物、衣装差分</h3>
+                        <p class="font-bold text-orange-500">+5,000円〜</p>
+                    </div>
+                    <p class="text-xs text-gray-500">複雑な衣装・装飾（武器、楽器等）</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-xl p-6 shadow-sm flex justify-between items-center bg-gray-50/50 md:col-span-2">
+                    <h3 class="font-bold text-gray-900">キャラクターデザインから依頼</h3>
+                    <p class="font-bold text-orange-500">+15,000円〜</p>
+                </div>
+
+                <!-- 権利・非公開 -->
+                <div class="border border-gray-200 rounded-xl p-6 shadow-sm">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">著作権譲渡</h3>
+                    <p class="font-bold text-xl text-orange-500 mb-1">+制作費の100%</p>
+                    <p class="text-xs text-gray-600">※規約記載</p>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-6 shadow-sm">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">実績非公開</h3>
+                    <p class="font-bold text-xl text-orange-500">+制作費の100%</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⑥制作にあたり & ⑦対応が難しい内容 -->
+    <section class="py-16 bg-gray-100 text-gray-800">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            
+            <div class="mb-12">
+                <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center border-b border-gray-300 pb-3">
+                    <i data-lucide="info" class="w-5 h-5 mr-2 text-orange-500"></i> 制作にあたり
+                </h2>
+                <ul class="space-y-3 text-sm leading-relaxed list-disc list-outside ml-5">
+                    <li>二次創作(アニメや漫画などの既存IP)キャラクターのご依頼はお受けできません。</li>
+                    <li>ご提供いただいた資料等は、ご依頼のためだけに使用いたします。</li>
+                    <li>一定期間ご連絡が取れない場合や、未払い時のキャンセル規定がございます。</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center border-b border-gray-300 pb-3">
+                    <i data-lucide="x-circle" class="w-5 h-5 mr-2 text-orange-500"></i> 対応が難しい内容
+                </h2>
+                <ul class="space-y-3 text-sm leading-relaxed list-disc list-outside ml-5">
+                    <li>極端に短納期でのご依頼</li>
+                    <li>ラフ完成後、完成作業時の大幅な構図変更やデザイン変更</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ⑩ お支払い -->
+    <section id="payment" class="py-16 md:py-24 bg-gray-50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 relative inline-block">
+                    お支払い
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4 w-12 h-1 bg-orange-500 rounded-full"></span>
+                </h2>
+            </div>
+
+            <div class="space-y-6">
+                <!-- タイミング -->
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="font-bold text-lg text-gray-900 border-b border-gray-100 pb-3 mb-4">■ お振込みのタイミング</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-800 mb-5 ml-2">
+                        <li><strong>【個人様】事前払い</strong></li>
+                        <li><strong>【個人様】ご希望着手月の2ヶ月前まで</strong>にお支払い</li>
+                        <li><strong>振込予定日</strong>を事前に共有</li>
+                    </ul>
+                    <div class="bg-orange-50 border border-orange-100 rounded-lg p-4 text-sm text-orange-800 space-y-1">
+                        <p>・事前にヒアリングした振込予定日でのご入金が難しい場合は、早めにご連絡ください</p>
+                        <p>・制作スケジュール確保のため、ご協力をお願いいたします</p>
+                    </div>
+                </div>
+
+                <!-- 支払い方法 -->
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="font-bold text-lg text-gray-900 border-b border-gray-100 pb-3 mb-5">■ お振込み方法</h3>
+                    
+                    <div class="space-y-8">
+                        <!-- 方法1 -->
+                        <div>
+                            <h4 class="font-bold text-base text-orange-600 mb-2 flex items-center">
+                                <span class="bg-orange-100 text-orange-600 rounded px-2 py-0.5 text-xs mr-2">1</span> 指定口座振り込み（ゆうちょ銀行）
+                            </h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm text-gray-700 ml-2 mb-3">
+                                <li>電子請求書を発行</li>
+                                <li>振込名義の共有をお願いしております</li>
+                            </ul>
+                            <div class="bg-gray-50 rounded p-3 text-xs text-gray-600 space-y-1">
+                                <p>・請求書の名義と振込名義が一致していれば問題ありません</p>
+                                <p>・活動名での振込も可能です（事前共有必須）</p>
+                                <p>・振込名義の変更方法は各銀行にてご確認ください</p>
+                            </div>
+                        </div>
+
+                        <!-- 方法2 -->
+                        <div>
+                            <h4 class="font-bold text-base text-orange-600 mb-2 flex items-center">
+                                <span class="bg-orange-100 text-orange-600 rounded px-2 py-0.5 text-xs mr-2">2</span> 仲介サイト「つなぐ」
+                            </h4>
+                            <p class="text-sm text-gray-700 mb-2">
+                                直接取引が不安な方向けの決済方法です。<br>
+                                （SKIMA、ココナラ等と類似したコミッションサイトです）
+                            </p>
+                            <p class="text-sm text-gray-700 font-medium mb-4">
+                                お見積り合計金額に加えて、つなぐの手数料を含めてお支払いいただく形式です。
+                            </p>
+                            
+                            <p class="text-sm font-bold text-gray-800 mb-2">つなぐの手数料</p>
+                            <div class="border border-gray-200 rounded-lg overflow-hidden bg-white mb-3">
+                                <table class="w-full text-left text-sm">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="py-2.5 px-4 font-medium text-gray-600 border-b">決済方法</th>
+                                            <th class="py-2.5 px-4 font-medium text-gray-600 border-b">手数料</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-100">
+                                        <tr>
+                                            <td class="py-2.5 px-4">銀行振込</td>
+                                            <td class="py-2.5 px-4">2.8% + 390円</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2.5 px-4">クレカ／コンビニ決済</td>
+                                            <td class="py-2.5 px-4">5.5% + 390円</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a href="https://tsunagu.cloud/" target="_blank" rel="noopener noreferrer" class="text-xs text-orange-500 hover:underline flex items-center">
+                                つなぐ公式サイトへ <i data-lucide="external-link" class="w-3 h-3 ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 注意事項 -->
+                <div class="bg-white border-2 border-gray-200 border-l-4 border-l-orange-500 p-5 rounded-lg shadow-sm mt-6">
+                    <h4 class="font-bold text-gray-900 mb-2">注意事項</h4>
+                    <p class="text-sm text-gray-700 space-y-1">
+                        <span class="block">※お支払い方法やスケジュールに関する不明点は事前にご相談ください</span>
+                        <span class="block">※スムーズな制作進行のため、振込予定日の共有をお願いいたします</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⑪ キャンセル -->
+    <section id="cancel-policy" class="py-16 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <h2 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-3 flex items-center">
+                <i data-lucide="slash" class="w-5 h-5 mr-2 text-gray-400"></i> キャンセルについて
+            </h2>
+            
+            <div class="space-y-4 text-sm text-gray-800">
+                <p class="text-sm font-bold text-gray-900 mb-2">下の期間からキャンセル料が発生いたします</p>
+
+                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
+                    <span class="font-bold">① お振込み日から7日後</span>
+                    <span class="text-right">報酬の25%</span>
+                </div>
+                
+                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
+                    <span class="font-bold">② 予定の制作期間の初日から計算して3日前に突入している</span>
+                    <span class="text-right">報酬の25%</span>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <p class="font-bold mb-3 pb-2 border-b border-gray-100">③ 制作期間中</p>
+                    <ul class="space-y-3">
+                        <li class="flex justify-between items-center">
+                            <span class="pl-3 relative before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full">［ラフ制作時］</span>
+                            <span class="font-bold">報酬の50%</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span class="pl-3 relative before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full">［完成制作時］</span>
+                            <span class="font-bold text-red-600">報酬の100%をお支払い</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <p class="text-xs text-gray-500 mt-4">※ご事情によりましてはキャンセル料をいただかない場合もございますので、キャンセル時は出来る限り早めにご相談ください。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⑫ お見積り・ご依頼前の確認事項（アコーディオン） -->
+    <section id="terms" class="py-12 bg-gray-50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                <div class="p-6 pb-4 border-b border-gray-100 bg-gray-100 text-gray-900">
+                    <h2 class="text-lg font-bold flex items-center">
+                        📝 お見積り・ご依頼前の確認事項
+                    </h2>
+                    <p class="text-sm font-bold text-red-500 mt-2 flex items-center">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 mr-1"></i> お見積り・ご依頼前に必読お願いします！
+                    </p>
+                </div>
+                
+                <div class="relative">
+                    <div id="terms-content-wrapper" class="p-6 text-sm text-gray-700 leading-relaxed max-h-72 overflow-hidden transition-all duration-700 ease-in-out">
+                        <p class="text-xs text-gray-500 mb-6">※トラブルが発生した場合はこちらの内容を基にご対応させていただきます。</p>
+                        
+                        <h3 class="font-bold text-gray-900 border-l-4 border-orange-500 pl-2 mb-3">⚫︎ ご依頼の詳細やご希望内容について</h3>
+                        <ul class="list-disc list-outside ml-5 space-y-2 mb-6">
+                            <li>現在、本家様の絵にそっくりに描く（他の方の絵柄に似せて描く）制作依頼は受け付けていません。</li>
+                            <li>掲載してるサンプルイラストはあくまでもサンプルになります。全くそっくりの描写は難しいです。「どうしてもこの感じが好きだから描いてほしい」場合は当方の過去のイラストを添えてその旨をご相談ください。</li>
+                            <li>事前にサイズや形式、これは必ず描いて欲しいご希望内容などは可能な限り細かく伝えていただけますとイメージに近い作品を制作することができます。ご協力いただけますと幸いです。</li>
+                            <li>カラーラフに関しまして、全体の色味と構図が完成時と大きく変わらないものをできる限り提供いたします。その際に何かご不明点がございましたら気軽にご相談ください。</li>
+                            <li>お問合せ・ご相談の途中で返信が「3日以上」過ぎる場合<br>→他の方のご依頼内容を優先させていただきます！</li>
+                            <li>受付期間中に複数の方からご依頼があった場合<br>①いただいた順でメッセージを返信！<br>↓<br>②先にお支払いが完了した方を優先に制作期間を確保！</li>
+                        </ul>
+
+                        <h3 class="font-bold text-gray-900 border-l-4 border-orange-500 pl-2 mb-3">⚫︎ リテイクについて</h3>
+                        <ul class="list-disc list-outside ml-5 space-y-2 mb-6">
+                            <li>ラフ確認時で「2回」完成時で「1回」無料となります。</li>
+                            <li>リテイク内容に関しましては必ず一度にまとめてお送りください。箇条書きでもOKです。</li>
+                            <li>見積もりお問い合わせ時に事前にヒヤリングをいたします。そのヒヤリング時にご共有頂けなかった内容の追加、または大幅な描写変更があった場合は「リテイク回数関係なく」追加料金が発生いたします。<br><span class="text-xs text-gray-500">例：ラフを確認してから描写追加や変更を希望。</span></li>
+                            <li>ご共有頂いた描写予定のモデルを拝見し、特徴を捉えて描写予定ではございますが、モデルのアイデンティティ(泣きほくろや目の形など)の描写を忘れている場合はご遠慮なくお伝えください。</li>
+                        </ul>
+
+                        <h3 class="font-bold text-gray-900 border-l-4 border-orange-500 pl-2 mb-3">⚫︎ お支払いについて</h3>
+                        <ul class="list-disc list-outside ml-5 space-y-2 mb-6">
+                            <li>「お振込予定日」に記入した日付、または電子請求書で記載の日付までにお振込みください。</li>
+                            <li>連絡が無いまま振込み日を過ぎるとキャンセルになります。</li>
+                            <li>日付を過ぎてからのお振込みはスケジュールの立て直しをいたします。</li>
+                        </ul>
+
+                        <h3 class="font-bold text-gray-900 border-l-4 border-orange-500 pl-2 mb-3">⚫︎ キャンセル料について</h3>
+                        <p class="mb-2 text-xs">下の期間からキャンセル料が発生いたします</p>
+                        <ul class="space-y-1 mb-2 ml-2">
+                            <li>① お振込み日から7日後: <span class="font-bold text-gray-900">報酬の25%</span></li>
+                            <li>② 予定の制作期間の初日から計算して3日前に突入している: <span class="font-bold text-gray-900">報酬の25%</span></li>
+                            <li>③ 制作期間中:<br>［ラフ制作時］▶︎ <span class="font-bold text-gray-900">報酬の50%</span><br>［完成制作時］▶︎ <span class="font-bold text-red-600">報酬の100%をお支払い</span></li>
+                        </ul>
+                        <p class="text-xs text-gray-500 mb-6">※ご事情によりましてはキャンセル料をいただかない場合もございますので、キャンセル時は出来る限り早めにご相談ください。</p>
+
+                        <h3 class="font-bold text-gray-900 border-l-4 border-orange-500 pl-2 mb-3">⚫︎ 商用利用や二次利用について</h3>
+                        <ul class="list-disc list-outside ml-5 space-y-2 mb-2">
+                            <li>本家様から配布されている背景をそのまま使用しているイラストで利用を希望<br>→そのまま使用するのは使用素材の規約に反しているため、商業利用(グッズ制作など)は<strong class="text-red-500">NG✖︎</strong><br>背景制作も追加でご依頼ください。</li>
+                            <li>「オリジナル制作」の場合は<strong class="text-green-600">⭕️</strong><br>利用料金が発生しますので事前にご相談ください。</li>
+                        </ul>
+                        <p class="text-xs text-red-600 bg-red-50 p-2 rounded mb-6 border border-red-100">※無断での使用を発見した際は「二次利用料などの請求」または「該当作品の使用停止」を行います。</p>
+
+                        <h3 class="font-bold text-gray-900 border-l-4 border-orange-500 pl-2 mb-3">⚫︎ クレジット、実績公開について</h3>
+                        <ul class="list-disc list-outside ml-5 space-y-2 mb-6">
+                            <li>個人依頼者さまの制作物は実績公開する可能性ございます。<br>納品日から【3ヶ月】が経過→作品の未投稿でも実績公開します！<br>3ヶ月以上先の具体的な日にちにが決定している場合は公開を控えますので事前にご相談いただけますと幸いです。</li>
+                            <li>クレジットの記載<br>→どのプラットフォームでも「描いた人この人だよー！」って分かるようにクレジット必ずご記載ください。<br>記載方法は納品データと一緒に画像とPDFで送ります。<br><span class="text-xs text-gray-500">※クレジット記載を希望しない場合はオプション料金として「+作品の報酬金額の半分」をいただきます。</span></li>
+                        </ul>
+
+                        <h3 class="font-bold text-red-600 border-l-4 border-red-500 pl-2 mb-3">● 制作した作品のAI学習NG</h3>
+                        <p class="mb-6 font-bold text-gray-900">事前にお伝えいただいた使用用途以外の無断使用（主に商用利用）、加工、転載はNG。</p>
+
+                    </div>
+                    
+                    <!-- グラデーションオーバーレイ -->
+                    <div id="terms-gradient" class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none transition-opacity duration-300"></div>
+                </div>
+
+                <!-- 開閉ボタン -->
+                <div class="px-6 pb-6 text-center bg-white relative z-10">
+                    <button type="button" onclick="toggleTerms()" class="bg-white border-2 border-orange-500 text-orange-500 px-8 py-3 rounded-full font-bold shadow-md hover:bg-orange-50 hover:shadow-lg transition-all duration-300 flex items-center justify-center mx-auto transform hover:-translate-y-1">
+                        <span id="terms-btn-text">内容をすべて確認する</span> <i id="terms-btn-icon" data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform duration-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⑬ お見積もりシミュレーション＆ご依頼フォーム -->
+    <section id="contact" class="py-16 md:py-24 bg-white border-t border-gray-100">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            
+            <div class="text-center mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 relative inline-block mb-4">
+                    お見積もり・ご依頼フォーム作成
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4 w-12 h-1 bg-orange-500 rounded-full"></span>
+                </h2>
+                <p class="text-sm text-gray-600 mt-6">以下の項目を選択・入力すると概算お見積もりが算出されます。<br>内容を確認後、結果をコピーして専用フォームよりご送信ください。</p>
+            </div>
+
+            <div class="h-1.5 bg-gray-200 w-full rounded-full overflow-hidden mb-8">
+                <div id="progress-bar" class="h-full bg-orange-500 transition-all duration-300" style="width: 0%;"></div>
+            </div>
+
+            <form id="simulation-form" class="space-y-8">
+                
+                <!-- Section 1: Client Type -->
+                <section class="bg-gray-50 p-6 sm:p-8 rounded-2xl border border-gray-200 form-section">
+                    <h4 class="text-lg font-bold text-gray-900 mb-5 flex items-center border-b border-gray-200 pb-3">
+                        <span class="bg-gray-800 text-white rounded w-6 h-6 inline-flex items-center justify-center text-xs mr-3">1</span>
+                        ご依頼区分
+                    </h4>
+                    
+                    <div class="mb-2">
+                        <label class="font-bold text-sm block text-gray-700 mb-2">ご依頼区分 <span class="text-red-500 text-xs ml-1">必須</span></label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="cursor-pointer relative bg-white rounded-xl">
+                                <input type="radio" name="clientType" value="individual" class="custom-radio sr-only" required>
+                                <div class="border-2 border-gray-200 rounded-xl py-3 px-4 text-center font-bold text-sm transition-colors hover:border-orange-200">
+                                    個人
+                                </div>
+                            </label>
+                            <label class="cursor-pointer relative bg-white rounded-xl">
+                                <input type="radio" name="clientType" value="corporate" class="custom-radio sr-only" required>
+                                <div class="border-2 border-gray-200 rounded-xl py-3 px-4 text-center font-bold text-sm transition-colors hover:border-orange-200">
+                                    企業・法人
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Schedule -->
+                <section class="bg-gray-50 p-6 sm:p-8 rounded-2xl border border-gray-200 form-section">
+                    <h4 class="text-lg font-bold text-gray-900 mb-5 flex items-center border-b border-gray-200 pb-3">
+                        <span class="bg-gray-800 text-white rounded w-6 h-6 inline-flex items-center justify-center text-xs mr-3">2</span>
+                        スケジュール
+                    </h4>
+                    
+                    <div class="space-y-3">
+                        <label class="font-bold text-sm block text-gray-700">希望スケジュール <span class="text-red-500 text-xs ml-1">必須</span></label>
+                        <div class="space-y-3">
+                            <label class="cursor-pointer relative block bg-white">
+                                <input type="radio" name="schedule" value="2026-07" class="custom-radio sr-only" required>
+                                <div class="border-2 border-gray-200 rounded-xl p-4 transition-colors hover:border-orange-200 flex items-start">
+                                    <div class="radio-icon w-5 h-5 rounded-full border-2 border-gray-300 mr-3 mt-0.5 flex-shrink-0 transition-colors flex items-center justify-center">
+                                        <div class="w-2 h-2 rounded-full bg-white"></div>
+                                    </div>
+                                    <div class="font-bold text-gray-900 mt-0.5">2026年7月着手・7月末納品</div>
+                                </div>
+                            </label>
+
+                            <label class="cursor-pointer relative block bg-white">
+                                <input type="radio" name="schedule" value="2026-09" class="custom-radio sr-only" required>
+                                <div class="border-2 border-gray-200 rounded-xl p-4 transition-colors hover:border-orange-200 flex items-start">
+                                    <div class="radio-icon w-5 h-5 rounded-full border-2 border-gray-300 mr-3 mt-0.5 flex-shrink-0 transition-colors flex items-center justify-center">
+                                        <div class="w-2 h-2 rounded-full bg-white"></div>
+                                    </div>
+                                    <div class="font-bold text-gray-900 mt-0.5">2026年9月着手・9月末納品</div>
+                                </div>
+                            </label>
+
+                            <label class="cursor-pointer relative block bg-white">
+                                <input type="radio" name="schedule" value="2026-10" class="custom-radio sr-only" required>
+                                <div class="border-2 border-gray-200 rounded-xl p-4 transition-colors hover:border-orange-200 flex items-start">
+                                    <div class="radio-icon w-5 h-5 rounded-full border-2 border-gray-300 mr-3 mt-0.5 flex-shrink-0 transition-colors flex items-center justify-center">
+                                        <div class="w-2 h-2 rounded-full bg-white"></div>
+                                    </div>
+                                    <div class="font-bold text-gray-900 mt-0.5">2026年10月着手～</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Request Details -->
+                <section class="bg-gray-50 p-6 sm:p-8 rounded-2xl border border-gray-200 form-section">
+                    <h4 class="text-lg font-bold text-gray-900 mb-5 flex items-center border-b border-gray-200 pb-3">
+                        <span class="bg-gray-800 text-white rounded w-6 h-6 inline-flex items-center justify-center text-xs mr-3">3</span>
+                        依頼内容
+                    </h4>
+
+                    <!-- 企業・法人向けメッセージ -->
+                    <div id="corporate-message" class="hidden mb-6 p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                        <p class="font-bold text-orange-800 text-sm flex items-center">
+                            <i data-lucide="info" class="w-5 h-5 mr-2"></i>
+                            企業・法人様へ
+                        </p>
+                        <p class="text-sm text-orange-700 mt-2 leading-relaxed">
+                            企業・法人様からのご依頼は、ご要望に合わせて個別にお見積もりを作成いたします。<br>
+                            このステップでのプラン・オプションの選択は不要です。次のお客様情報ステップにて、ご依頼の詳細をご記入ください。
+                        </p>
+                    </div>
+
+                    <div id="plan-selection-container">
+                        <!-- プラン -->
+                        <div class="mb-6">
+                            <label class="font-bold text-sm block text-gray-700 mb-2">ご希望プラン <span class="text-red-500 text-xs ml-1">必須</span></label>
+                            <div class="space-y-3">
+                                <label class="cursor-pointer relative block bg-white">
+                                    <input type="radio" name="plan" value="basic" class="custom-radio sr-only" required>
+                                    <div class="border-2 border-gray-200 rounded-xl p-4 transition-colors hover:border-orange-200 flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="radio-icon w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0 transition-colors flex items-center justify-center"><div class="w-2 h-2 rounded-full bg-white"></div></div>
+                                            <span class="font-bold text-gray-900">おてがるプラン</span>
+                                        </div>
+                                        <span class="font-bold text-orange-600 text-sm">15,000円〜</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="cursor-pointer relative block bg-white">
+                                    <input type="radio" name="plan" value="standard" class="custom-radio sr-only" required>
+                                    <div class="border-2 border-gray-200 rounded-xl p-4 transition-colors hover:border-orange-200 flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="radio-icon w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0 transition-colors flex items-center justify-center"><div class="w-2 h-2 rounded-full bg-white"></div></div>
+                                            <span class="font-bold text-gray-900">スタンダードプラン</span>
+                                        </div>
+                                        <span class="font-bold text-orange-600 text-sm">35,000円〜</span>
+                                    </div>
+                                </label>
+
+                                <label class="cursor-pointer relative block bg-white">
+                                    <input type="radio" name="plan" value="premium" class="custom-radio sr-only" required>
+                                    <div class="border-2 border-gray-200 rounded-xl p-4 transition-colors hover:border-orange-200 flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="radio-icon w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0 transition-colors flex items-center justify-center"><div class="w-2 h-2 rounded-full bg-white"></div></div>
+                                            <span class="font-bold text-gray-900">プレミアムプラン</span>
+                                        </div>
+                                        <span class="font-bold text-orange-600 text-sm">60,000円〜</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- カスタマイズオプション (動的表示) -->
+                        <div id="customize-options-container" class="mb-6 p-4 bg-white border border-gray-200 rounded-xl hidden">
+                            <h5 class="font-bold text-sm text-gray-800 mb-3 border-b border-gray-100 pb-2">プランのカスタマイズ <span class="text-xs text-gray-400 font-normal ml-1">任意</span></h5>
+                            
+                            <!-- おてがる用 -->
+                            <div id="custom-basic" class="space-y-4 hidden">
+                                <div>
+                                    <label class="font-bold text-xs block text-gray-600 mb-2">背景の変更</label>
+                                    <div class="space-y-2">
+                                        <label class="cursor-pointer relative block bg-gray-50 rounded">
+                                            <input type="radio" name="customBgBasic" value="0" class="custom-radio sr-only" checked>
+                                            <div class="border border-gray-200 rounded p-2 text-sm transition-colors hover:border-orange-200 flex justify-between">
+                                                <div class="flex items-center"><div class="radio-icon w-4 h-4 rounded-full border-2 border-gray-300 mr-2 flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-white"></div></div>変更なし</div>
+                                                <span class="text-gray-500 font-medium">±0円</span>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer relative block bg-gray-50 rounded">
+                                            <input type="radio" name="customBgBasic" value="5000" class="custom-radio sr-only">
+                                            <div class="border border-gray-200 rounded p-2 text-sm transition-colors hover:border-orange-200 flex justify-between">
+                                                <div class="flex items-center"><div class="radio-icon w-4 h-4 rounded-full border-2 border-gray-300 mr-2 flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-white"></div></div>スタンダードくらいに変更</div>
+                                                <span class="text-orange-600 font-medium">+5,000円〜</span>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer relative block bg-gray-50 rounded">
+                                            <input type="radio" name="customBgBasic" value="15000" class="custom-radio sr-only">
+                                            <div class="border border-gray-200 rounded p-2 text-sm transition-colors hover:border-orange-200 flex justify-between">
+                                                <div class="flex items-center"><div class="radio-icon w-4 h-4 rounded-full border-2 border-gray-300 mr-2 flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-white"></div></div>プレミアムくらいに変更</div>
+                                                <span class="text-orange-600 font-medium">+15,000円〜</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- スタンダード用 -->
+                            <div id="custom-standard" class="space-y-4 hidden">
+                                <div>
+                                    <label class="font-bold text-xs block text-gray-600 mb-2">背景の変更</label>
+                                    <div class="space-y-2">
+                                        <label class="cursor-pointer relative block bg-gray-50 rounded">
+                                            <input type="radio" name="customBgStandard" value="0" class="custom-radio sr-only" checked>
+                                            <div class="border border-gray-200 rounded p-2 text-sm transition-colors hover:border-orange-200 flex justify-between">
+                                                <div class="flex items-center"><div class="radio-icon w-4 h-4 rounded-full border-2 border-gray-300 mr-2 flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-white"></div></div>変更なし</div>
+                                                <span class="text-gray-500 font-medium">±0円</span>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer relative block bg-gray-50 rounded">
+                                            <input type="radio" name="customBgStandard" value="-5000" class="custom-radio sr-only">
+                                            <div class="border border-gray-200 rounded p-2 text-sm transition-colors hover:border-orange-200 flex justify-between">
+                                                <div class="flex items-center"><div class="radio-icon w-4 h-4 rounded-full border-2 border-gray-300 mr-2 flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-white"></div></div>おてがるくらいに変更</div>
+                                                <span class="text-blue-600 font-medium">-5,000円</span>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer relative block bg-gray-50 rounded">
+                                            <input type="radio" name="customBgStandard" value="5000" class="custom-radio sr-only">
+                                            <div class="border border-gray-200 rounded p-2 text-sm transition-colors hover:border-orange-200 flex justify-between">
+                                                <div class="flex items-center"><div class="radio-icon w-4 h-4 rounded-full border-2 border-gray-300 mr-2 flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-white"></div></div>プレミアムくらいに変更</div>
+                                                <span class="text-orange-600 font-medium">+5,000円〜</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="font-bold text-xs block text-gray-600 mb-2">ポーズの変更</label>
+                                    <label class="cursor-pointer relative block bg-gray-50 rounded">
+                                        <input type="checkbox" name="customPoseStandard" value="-5000" class="custom-checkbox sr-only">
+                                        <div class="border border-gray-200 rounded p-2 text-sm transition-colors hover:border-orange-200 flex justify-between">
+                                            <div class="flex items-center"><div class="checkbox-icon w-4 h-4 rounded border-2 border-gray-300 mr-2 relative"></div>ポーズ差分なし</div>
+                                            <span class="text-blue-600 font-medium">-5,000円</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- プレミアム用 -->
+                            <div id="custom-premium" class="space-y-4 hidden">
+                                <div>
+                                    <label class="font-bold text-xs block text-gray-600 mb-2">背景の変更</label>
+                                    <div class="space-y-2">
+                                        <label class="cursor-pointer relative block bg-gray-50 rounded">
+                                            <input type="radio" name="customBgPremium" value="0" class="custom-radio sr-only" checked>
+                                            <div class="border border-gray-200 rounded p-2 text-sm transition-colors hover:border-orange-200 flex justify-between">
+                                                <div class="flex items-center"><div class="radio-icon w-4 h-4 rounded-full border-2 border-gray-300 mr-2 flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-white"></div></div>変更なし</div>
+                                                <span class="text-gray-500 font-medium">±0円</span>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer relative block bg-gray-50 rounded">
+                                            <input type="radio" name="customBgPremium" value="-10000" class="custom-radio sr-only">
+                                            <div class="border border-gray-200 rounded p-2 text-sm transition-colors hover:border-orange-200 flex justify-between">
+                                                <div class="flex items-center"><div class="radio-icon w-4 h-4 rounded-full border-2 border-gray-300 mr-2 flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-white"></div></div>おてがるくらいに変更</div>
+                                                <span class="text-blue-600 font-medium">-10,000円</span>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer relative block bg-gray-50 rounded">
+                                            <input type="radio" name="customBgPremium" value="-5000" class="custom-radio sr-only">
+                                            <div class="border border-gray-200 rounded p-2 text-sm transition-colors hover:border-orange-200 flex justify-between">
+                                                <div class="flex items-center"><div class="radio-icon w-4 h-4 rounded-full border-2 border-gray-300 mr-2 flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-white"></div></div>スタンダードくらいに変更</div>
+                                                <span class="text-blue-600 font-medium">-5,000円</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="font-bold text-xs block text-gray-600 mb-2">ポーズの変更</label>
+                                    <label class="cursor-pointer relative block bg-gray-50 rounded">
+                                        <input type="checkbox" name="customPosePremium" value="-10000" class="custom-checkbox sr-only">
+                                        <div class="border border-gray-200 rounded p-2 text-sm transition-colors hover:border-orange-200 flex justify-between">
+                                            <div class="flex items-center"><div class="checkbox-icon w-4 h-4 rounded border-2 border-gray-300 mr-2 relative"></div>ポーズ差分なし</div>
+                                            <span class="text-blue-600 font-medium">-10,000円</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 共通オプション -->
+                        <div>
+                            <label class="font-bold text-sm block text-gray-700 mb-2">オプション <span class="text-gray-400 text-xs font-normal ml-1">複数選択可</span></label>
+                            <div class="space-y-2">
+                                <label class="cursor-pointer relative block bg-white">
+                                    <input type="checkbox" name="options" value="addPerson" class="custom-checkbox sr-only">
+                                    <div class="border border-gray-200 rounded-lg p-3 transition-colors hover:border-orange-200 flex justify-between items-center text-sm">
+                                        <div class="flex items-center"><div class="checkbox-icon w-4 h-4 rounded border-2 border-gray-300 mr-3 relative"></div><span class="font-bold text-gray-900">人物追加（1人につき）</span></div>
+                                        <span class="font-bold text-orange-600">+10,000円〜</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer relative block bg-white">
+                                    <input type="checkbox" name="options" value="diffFace" class="custom-checkbox sr-only">
+                                    <div class="border border-gray-200 rounded-lg p-3 transition-colors hover:border-orange-200 flex justify-between items-center text-sm">
+                                        <div class="flex items-center"><div class="checkbox-icon w-4 h-4 rounded border-2 border-gray-300 mr-3 relative"></div><span class="font-bold text-gray-900">表情差分</span></div>
+                                        <span class="font-bold text-orange-600">+1,000円〜</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer relative block bg-white">
+                                    <input type="checkbox" name="options" value="addPose" class="custom-checkbox sr-only">
+                                    <div class="border border-gray-200 rounded-lg p-3 transition-colors hover:border-orange-200 flex justify-between items-center text-sm">
+                                        <div class="flex items-center"><div class="checkbox-icon w-4 h-4 rounded border-2 border-gray-300 mr-3 relative"></div><span class="font-bold text-gray-900">ポーズをもう1つ作る</span></div>
+                                        <span class="font-bold text-orange-600">+8,000円〜</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer relative block bg-white">
+                                    <input type="checkbox" name="options" value="complex" class="custom-checkbox sr-only">
+                                    <div class="border border-gray-200 rounded-lg p-3 transition-colors hover:border-orange-200 flex justify-between items-center text-sm">
+                                        <div class="flex items-center"><div class="checkbox-icon w-4 h-4 rounded border-2 border-gray-300 mr-3 relative"></div><span class="font-bold text-gray-900">複雑な装飾・小物、衣装差分</span></div>
+                                        <span class="font-bold text-orange-600">+5,000円〜</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer relative block bg-white">
+                                    <input type="checkbox" name="options" value="charDesign" class="custom-checkbox sr-only">
+                                    <div class="border border-gray-200 rounded-lg p-3 transition-colors hover:border-orange-200 flex justify-between items-center text-sm">
+                                        <div class="flex items-center"><div class="checkbox-icon w-4 h-4 rounded border-2 border-gray-300 mr-3 relative"></div><span class="font-bold text-gray-900">キャラクターデザインから依頼</span></div>
+                                        <span class="font-bold text-orange-600">+15,000円〜</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer relative block bg-white">
+                                    <input type="checkbox" name="options" value="copyright" class="custom-checkbox sr-only">
+                                    <div class="border border-gray-200 rounded-lg p-3 transition-colors hover:border-orange-200 flex justify-between items-center text-sm">
+                                        <div class="flex items-center"><div class="checkbox-icon w-4 h-4 rounded border-2 border-gray-300 mr-3 relative"></div><span class="font-bold text-gray-900">著作権譲渡</span></div>
+                                        <span class="font-bold text-orange-600">+制作費の100%</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer relative block bg-white">
+                                    <input type="checkbox" name="options" value="private" class="custom-checkbox sr-only">
+                                    <div class="border border-gray-200 rounded-lg p-3 transition-colors hover:border-orange-200 flex justify-between items-center text-sm">
+                                        <div class="flex items-center"><div class="checkbox-icon w-4 h-4 rounded border-2 border-gray-300 mr-3 relative"></div><span class="font-bold text-gray-900">実績非公開</span></div>
+                                        <span class="font-bold text-orange-600">+制作費の100%</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div> <!-- plan-selection-container end -->
+                </section>
+
+                <!-- Section 4: Client Info -->
+                <section class="bg-gray-50 p-6 sm:p-8 rounded-2xl border border-gray-200 form-section">
+                    <h4 class="text-lg font-bold text-gray-900 mb-5 flex items-center border-b border-gray-200 pb-3">
+                        <span class="bg-gray-800 text-white rounded w-6 h-6 inline-flex items-center justify-center text-xs mr-3">4</span>
+                        お客様情報・ヒアリング
+                    </h4>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="font-bold text-sm block text-gray-700 mb-1">お名前 <span class="text-xs text-gray-400 font-normal ml-1">個人は活動名OK</span> <span class="text-red-500 text-xs ml-1">必須</span></label>
+                            <input type="text" name="name" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" required>
+                        </div>
+                        
+                        <div id="company-field" class="hidden">
+                            <label class="font-bold text-sm block text-gray-700 mb-1">会社名 <span class="text-red-500 text-xs ml-1">必須</span></label>
+                            <input type="text" name="companyName" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-sm block text-gray-700 mb-1">メインSNS または 貴社HPのURL <span class="text-red-500 text-xs ml-1">必須</span></label>
+                            <input type="url" name="snsUrl" placeholder="https://..." class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" required>
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-sm block text-gray-700 mb-2">イラスト参考資料・設定画 <span class="text-red-500 text-xs ml-1">必須</span></label>
+                            <div class="space-y-3">
+                                <label class="cursor-pointer relative block bg-white rounded-lg">
+                                    <input type="radio" name="referenceDataType" value="url" class="custom-radio sr-only" required checked>
+                                    <div class="border border-gray-300 rounded-lg p-3 text-sm transition-colors hover:border-orange-500 flex items-center">
+                                        <div class="radio-icon w-4 h-4 rounded-full border-2 border-gray-300 mr-2 flex-shrink-0 flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-white"></div></div>
+                                        オンラインストレージ等のURLを入力する
+                                    </div>
+                                </label>
+                                
+                                <div id="ref-url-container" class="pl-6">
+                                     <p class="text-xs text-gray-500 mb-1">Google DriveなどのオンラインストレージURLをご入力ください</p>
+                                     <input type="url" name="referenceDataUrl" placeholder="https://drive.google.com/..." class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" required>
+                                </div>
+
+                                <label class="cursor-pointer relative block bg-white rounded-lg">
+                                    <input type="radio" name="referenceDataType" value="later" class="custom-radio sr-only" required>
+                                    <div class="border border-gray-300 rounded-lg p-3 text-sm transition-colors hover:border-orange-500 flex items-center">
+                                        <div class="radio-icon w-4 h-4 rounded-full border-2 border-gray-300 mr-2 flex-shrink-0 flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-white"></div></div>
+                                        今回のご依頼後に提出予定
+                                    </div>
+                                </label>
+                                
+                                <div id="ref-later-container" class="hidden mt-3 pl-6 border-l-2 border-orange-200">
+                                    <label class="font-bold text-sm block text-gray-700 mb-1">資料提出予定時期 <span class="text-red-500 text-xs ml-1">必須</span></label>
+                                    <input type="text" name="referenceDataTiming" placeholder="例：2026年8月上旬頃" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-sm block text-gray-700 mb-1">使用用途 <span class="text-red-500 text-xs ml-1">必須</span></label>
+                            <input type="text" name="usage" placeholder="例：SNSアイコン、MV動画用、グッズ用 など" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" required>
+                        </div>
+
+                        <div>
+                            <label class="cursor-pointer relative block bg-white">
+                                <input type="checkbox" name="isCommercial" value="yes" class="custom-checkbox sr-only">
+                                <div class="border border-gray-300 rounded-lg p-3 transition-colors hover:border-orange-500 flex items-center text-sm">
+                                    <div class="checkbox-icon w-4 h-4 rounded border-2 border-gray-300 mr-3 relative"></div>
+                                    <span class="font-bold text-gray-900">商用利用を希望する。</span>
+                                </div>
+                            </label>
+                            
+                            <div id="commercial-details-container" class="hidden mt-3 pl-6 border-l-2 border-orange-200">
+                                <label class="font-bold text-sm block text-gray-700 mb-1">利用方法を詳細にご記入ください。<span class="text-red-500 text-xs ml-1">必須</span></label>
+                                <textarea name="commercialDetails" rows="3" placeholder="例：YouTubeでの収益化動画に使用、販売用グッズのイラストとして使用 など" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"></textarea>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-sm block text-gray-700 mb-1">ご依頼の詳細 <span class="text-red-500 text-xs ml-1">必須</span></label>
+                            <p class="text-xs text-gray-500 mb-2">描いてほしいキャラクターの特徴、ポーズ、背景、雰囲気などを可能な限り詳細にご記入ください。</p>
+                            <textarea name="details" rows="5" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" required></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="font-bold text-sm block text-gray-700 mb-1">作品公開予定日 <span class="text-red-500 text-xs ml-1">必須</span></label>
+                                <input type="text" name="publishDate" placeholder="例: 2026年12月頃、未定など" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm" required>
+                            </div>
+                            <div>
+                                <label class="font-bold text-sm block text-gray-700 mb-1">イラストのサイズ・解像度希望 <span class="text-gray-400 text-xs font-normal ml-1">任意</span></label>
+                                <input type="text" name="sizeResolution" placeholder="例: 1920x1080px、350dpiなど" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-sm block text-gray-700 mb-2">ご希望の連絡方法 <span class="text-red-500 text-xs ml-1">必須</span></label>
+                            <div class="flex flex-wrap gap-2 sm:gap-3 mb-3">
+                                <label class="cursor-pointer relative bg-white rounded-lg">
+                                    <input type="radio" name="contactMethod" value="discord" class="custom-radio sr-only" required checked>
+                                    <div class="border border-gray-300 rounded-lg py-2 px-3 sm:px-4 text-xs sm:text-sm transition-colors hover:border-orange-500 font-medium">Discord</div>
+                                </label>
+                                <label class="cursor-pointer relative bg-white rounded-lg">
+                                    <input type="radio" name="contactMethod" value="email" class="custom-radio sr-only">
+                                    <div class="border border-gray-300 rounded-lg py-2 px-3 sm:px-4 text-xs sm:text-sm transition-colors hover:border-orange-500 font-medium">メール</div>
+                                </label>
+                                <label class="cursor-pointer relative bg-white rounded-lg">
+                                    <input type="radio" name="contactMethod" value="twitter" class="custom-radio sr-only">
+                                    <div class="border border-gray-300 rounded-lg py-2 px-3 sm:px-4 text-xs sm:text-sm transition-colors hover:border-orange-500 font-medium">X(Twitter)DM</div>
+                                </label>
+                                <label class="cursor-pointer relative bg-white rounded-lg">
+                                    <input type="radio" name="contactMethod" value="other" class="custom-radio sr-only">
+                                    <div class="border border-gray-300 rounded-lg py-2 px-3 sm:px-4 text-xs sm:text-sm transition-colors hover:border-orange-500 font-medium">その他</div>
+                                </label>
+                            </div>
+                            
+                            <!-- 連絡方法ごとの追加情報 -->
+                            <div id="contact-discord-info" class="bg-white border border-indigo-200 rounded-lg p-4 text-sm text-gray-700">
+                                ユーザー名: <span class="font-bold select-all bg-indigo-50 border border-indigo-100 text-indigo-700 px-2 py-1 rounded ml-1 tracking-wider">1000daaa_22</span>
+                                <p class="mt-2 text-xs text-gray-500 flex items-start"><i data-lucide="info" class="w-4 h-4 mr-1 flex-shrink-0 text-indigo-400"></i> お手数ですが、事前にフレンド申請をお願いいたします。</p>
+                            </div>
+                            <div id="contact-email-info" class="hidden bg-white border border-gray-200 rounded-lg p-4">
+                                <label class="font-bold text-sm block text-gray-700 mb-1">メールアドレス <span class="text-red-500 text-xs ml-1">必須</span></label>
+                                <input type="email" name="contactEmail" placeholder="your@email.com" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+                            </div>
+                            <div id="contact-twitter-info" class="hidden bg-white border border-gray-200 rounded-lg p-4 text-sm text-gray-700">
+                                <p class="text-xs text-gray-600 leading-relaxed flex items-start mb-2">
+                                    <i data-lucide="alert-circle" class="w-4 h-4 mr-1.5 flex-shrink-0 text-gray-400 mt-0.5"></i>
+                                    不具合により通知が届かない等のトラブル防止のために、恐れ入りますが事前にアカウントのフォローをしていただけますと幸いです。
+                                </p>
+                                <a href="https://x.com/1000_daaaa" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-orange-600 hover:underline font-medium text-xs">
+                                    千田ななほのX（Twitter）アカウントはこちら <i data-lucide="external-link" class="w-3 h-3 ml-1"></i>
+                                </a>
+                            </div>
+                            <div id="contact-other-info" class="hidden bg-white border border-gray-200 rounded-lg p-4">
+                                <label class="font-bold text-sm block text-gray-700 mb-1">連絡先詳細 <span class="text-red-500 text-xs ml-1">必須</span></label>
+                                <input type="text" name="contactOther" placeholder="希望する連絡ツールと連絡先（ID等）をご記入ください" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+                            </div>
+
+                            <div class="mt-6 space-y-4">
+                                <div>
+                                    <p class="text-sm text-gray-700 mb-1 font-medium">ご依頼関連の返信は基本1～2日以内に対応しております。</p>
+                                    <p class="text-xs text-gray-500">万が一、数日経っても返信が確認できない場合は、何らかの不具合の可能性がございますので、お手数ですが再度ご連絡いただけますようお願いいたします。</p>
+                                </div>
+
+                                <div class="bg-white border border-gray-200 p-4 rounded-lg">
+                                    <p class="font-bold text-sm text-gray-900 mb-2 flex items-center">
+                                        <i data-lucide="alert-triangle" class="w-4 h-4 mr-1 text-orange-500"></i> 緊急連絡先について
+                                    </p>
+                                    <p class="text-xs text-gray-600 leading-relaxed">
+                                        万が一、当方が連絡を取れない状況となった場合に備え、同居家族にクライアント様のご連絡先が分かるよう共有しております。<br>
+                                        また、そのような事態が発生した際には、同居家族より X（Twitter） にて状況のご報告を行う場合がございます。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: Payment -->
+                <section class="bg-gray-50 p-6 sm:p-8 rounded-2xl border border-gray-200 form-section">
+                    <h4 class="text-lg font-bold text-gray-900 mb-5 flex items-center border-b border-gray-200 pb-3">
+                        <span class="bg-gray-800 text-white rounded w-6 h-6 inline-flex items-center justify-center text-xs mr-3">5</span>
+                        お支払い
+                    </h4>
+
+                    <div class="mb-4">
+                        <label class="font-bold text-sm block text-gray-700 mb-2">お支払い方法 <span class="text-red-500 text-xs ml-1">必須</span></label>
+                        <div class="space-y-3">
+                            <label class="cursor-pointer relative block bg-white">
+                                <input type="radio" name="paymentMethod" value="bank_transfer" class="custom-radio sr-only" required>
+                                <div class="border-2 border-gray-200 rounded-xl p-4 transition-colors hover:border-orange-200 flex items-center">
+                                    <div class="radio-icon w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0 transition-colors flex items-center justify-center"><div class="w-2 h-2 rounded-full bg-white"></div></div>
+                                    <span class="font-bold text-gray-900 text-sm">指定口座振り込み（ゆうちょ銀行）</span>
+                                </div>
+                            </label>
+                            
+                            <div>
+                                <label class="cursor-pointer relative block bg-white">
+                                    <input type="radio" name="paymentMethod" value="tsunagu" class="custom-radio sr-only" required>
+                                    <div class="border-2 border-gray-200 rounded-xl p-4 transition-colors hover:border-orange-200 flex flex-col justify-center">
+                                        <div class="flex items-center">
+                                            <div class="radio-icon w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0 transition-colors flex items-center justify-center"><div class="w-2 h-2 rounded-full bg-white"></div></div>
+                                            <span class="font-bold text-gray-900 text-sm">仲介サイト「つなぐ」</span>
+                                        </div>
+                                    </div>
+                                </label>
+                                
+                                <!-- つなぐ 決済方法選択 -->
+                                <div id="tsunagu-options" class="hidden mt-3 pl-4 border-l-2 border-orange-200 space-y-2">
+                                    <label class="font-bold text-xs block text-gray-700 mb-1">決済方法の選択 <span class="text-red-500 ml-1">必須</span></label>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <label class="cursor-pointer relative block bg-white rounded-lg">
+                                            <input type="radio" name="tsunaguPaymentMethod" value="bank" class="custom-radio sr-only">
+                                            <div class="border-2 border-gray-200 rounded-lg p-3 text-center transition-colors hover:border-orange-200 flex flex-col items-center justify-center h-full">
+                                                <span class="text-sm font-bold text-gray-800">銀行振込</span>
+                                                <span class="text-[10px] text-gray-500 mt-1">手数料: 2.8% + 390円</span>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer relative block bg-white rounded-lg">
+                                            <input type="radio" name="tsunaguPaymentMethod" value="credit" class="custom-radio sr-only">
+                                            <div class="border-2 border-gray-200 rounded-lg p-3 text-center transition-colors hover:border-orange-200 flex flex-col items-center justify-center h-full">
+                                                <span class="text-sm font-bold text-gray-800">クレカ／コンビニ決済</span>
+                                                <span class="text-[10px] text-gray-500 mt-1">手数料: 5.5% + 390円</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <p class="text-[10px] text-orange-600 mt-2">※選択した決済方法の手数料が概算見積もりに加算されます。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 銀行振込時のみ表示 -->
+                    <div id="bank-details" class="hidden bg-white p-4 rounded-xl border border-gray-200 space-y-4">
+                        <div>
+                            <label class="font-bold text-sm block text-gray-700 mb-1">振込名義 <span class="text-red-500 text-xs ml-1">必須</span></label>
+                            <input type="text" name="transferName" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+                        </div>
+                        <div>
+                            <label class="font-bold text-sm block text-gray-700 mb-1">振込予定日 <span class="text-red-500 text-xs ml-1">必須</span></label>
+                            <input type="date" name="transferDate" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 6: Terms & Submit -->
+                <section class="bg-gray-50 p-6 sm:p-8 rounded-2xl border border-gray-200 form-section">
+                    <h4 class="text-lg font-bold text-gray-900 mb-5 flex items-center border-b border-gray-200 pb-3">
+                        <span class="bg-gray-800 text-white rounded w-6 h-6 inline-flex items-center justify-center text-xs mr-3">6</span>
+                        その他・確認
+                    </h4>
+
+                    <div class="mb-6">
+                        <label class="font-bold text-sm block text-gray-700 mb-1">備考欄</label>
+                        <textarea name="notes" rows="3" placeholder="ご質問や特記事項があればご記入ください" class="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"></textarea>
+                    </div>
+
+                    <label class="cursor-pointer relative block">
+                        <input type="checkbox" name="agreedToTerms" class="custom-checkbox sr-only" required>
+                        <div class="bg-orange-50 border border-orange-100 p-4 rounded-xl flex items-start transition-colors">
+                            <div class="checkbox-icon w-5 h-5 rounded border-2 border-gray-300 mr-3 mt-0.5 flex-shrink-0 transition-colors relative bg-white"></div>
+                            <div class="text-sm text-gray-800 font-medium">
+                                <a href="#terms" onclick="event.stopPropagation()" class="text-orange-600 hover:underline">お見積り・ご依頼前の確認事項</a>と<a href="#cancel-policy" onclick="event.stopPropagation()" class="text-orange-600 hover:underline">キャンセルについて</a>を確認し、同意します。
+                            </div>
+                        </div>
+                    </label>
+                </section>
+
+                <!-- Section 6: Result & Submit Button -->
+                <div id="result-section" class="bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-md border border-gray-800 text-center mt-8">
+                    <p class="text-sm text-gray-400 font-bold mb-2">概算見積もり (目安)</p>
+                    <div id="price-container" class="text-3xl sm:text-4xl font-bold text-white mb-2">
+                        <span id="estimated-price">0</span><span id="price-unit" class="text-lg font-normal text-gray-400 ml-1">円〜</span>
+                    </div>
+                    <p id="price-note" class="text-xs text-orange-500 hidden mb-6">※オプション等により変動する場合があります</p>
+                    
+                    <div class="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
+                        <button type="button" id="copy-only-btn" class="w-full sm:w-auto bg-gray-700 hover:bg-gray-600 text-white font-bold py-4 px-8 rounded-full transition-colors flex items-center justify-center shadow-sm">
+                            <i data-lucide="copy" class="w-5 h-5 mr-2"></i>
+                            見積もり内容をコピー
+                        </button>
+                        <button type="button" id="submit-form-btn" class="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full transition-colors flex items-center justify-center shadow-sm">
+                            <i data-lucide="external-link" class="w-5 h-5 mr-2"></i>
+                            コピーした内容を専用フォームに送信
+                        </button>
+                    </div>
+                    <div id="copy-feedback" class="text-sm font-bold text-green-400 mt-4 hidden">
+                        コピーしました！専用フォームへ進み、内容を貼り付けてください。
+                    </div>
+                </div>
+
+                <!-- Hidden textarea to hold generated text for copying -->
+                <textarea id="generated-text" class="sr-only" aria-hidden="true"></textarea>
+            </form>
+
+        </div>
+    </section>
+
+    <!-- フローティング見積もりバー (モバイル/スクロール時用) -->
+    <div id="floating-price-bar" class="fixed bottom-0 left-0 w-full bg-gray-900 border-t-4 border-orange-500 shadow-[0_-10px_20px_rgba(0,0,0,0.2)] z-40 transition-transform duration-300 translate-y-full flex justify-between items-center px-4 sm:px-8 py-4 sm:py-5 pb-safe">
+        <div class="text-sm sm:text-base text-gray-300 font-bold">現在の概算見積もり額</div>
+        <div class="text-2xl sm:text-3xl font-bold text-white tracking-wide">
+            <span id="floating-estimated-price">0</span><span id="floating-price-unit" class="text-base font-normal text-orange-400 ml-1">円〜</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
+        <p>&copy; センダイラスト All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Open specific details tag from link
+        function openDetail(id) {
+            const detailElement = document.getElementById(id);
+            if (detailElement && detailElement.tagName === 'DETAILS') {
+                detailElement.open = true;
+                // Add slight delay for smooth scroll after opening
+                setTimeout(() => {
+                    const y = detailElement.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({top: y, behavior: 'smooth'});
+                }, 50);
+            }
+        }
+
+        // Toggle Terms Section
+        let isTermsExpanded = false;
+        function toggleTerms() {
+            const wrapper = document.getElementById('terms-content-wrapper');
+            const overlay = document.getElementById('terms-gradient');
+            const btnText = document.getElementById('terms-btn-text');
+            const btnIcon = document.getElementById('terms-btn-icon');
+            
+            if (!isTermsExpanded) {
+                // 開く処理
+                wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+                overlay.style.opacity = "0";
+                btnText.textContent = "内容を閉じる";
+                btnIcon.classList.add('rotate-180');
+                isTermsExpanded = true;
+                
+                // アニメーション完了後にmaxHeightを外してレスポンシブ対応
+                setTimeout(() => {
+                    if (isTermsExpanded) wrapper.style.maxHeight = "none";
+                }, 700);
+            } else {
+                // 閉じる処理
+                wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+                void wrapper.offsetHeight; // force reflow
+                wrapper.style.maxHeight = "18rem"; // max-h-72 (72 * 0.25rem = 18rem)
+                overlay.style.opacity = "1";
+                btnText.textContent = "内容をすべて確認する";
+                btnIcon.classList.remove('rotate-180');
+                isTermsExpanded = false;
+            }
+        }
+
+        // ==========================================
+        // Simulation Form Logic
+        // ==========================================
+        const form = document.getElementById('simulation-form');
+        const estPriceDisplay = document.getElementById('estimated-price');
+        const priceUnit = document.getElementById('price-unit');
+        const floatingPriceDisplay = document.getElementById('floating-estimated-price');
+        const floatingPriceUnit = document.getElementById('floating-price-unit');
+        const priceNote = document.getElementById('price-note');
+        const copyOnlyBtn = document.getElementById('copy-only-btn');
+        const submitFormBtn = document.getElementById('submit-form-btn');
+        const copyFeedback = document.getElementById('copy-feedback');
+        const generatedTextArea = document.getElementById('generated-text');
+        const progressBar = document.getElementById('progress-bar');
+        const floatingPriceBar = document.getElementById('floating-price-bar');
+        const resultSection = document.getElementById('result-section');
+
+        const bankDetails = document.getElementById('bank-details');
+        const companyField = document.getElementById('company-field');
+        const planSelectionContainer = document.getElementById('plan-selection-container');
+        const corporateMessage = document.getElementById('corporate-message');
+        const customizeOptionsContainer = document.getElementById('customize-options-container');
+
+        // Floating Bar visibility logic
+        window.addEventListener('scroll', () => {
+            const resultRect = resultSection.getBoundingClientRect();
+            const formRect = form.getBoundingClientRect();
+            
+            // フォーム領域内にいるか（フォームの上端が画面下より上、かつ下端が画面上より下）
+            const inFormArea = formRect.top < window.innerHeight && formRect.bottom > 0;
+            // 結果セクションが見えているか
+            const isResultVisible = resultRect.top < window.innerHeight;
+
+            if (inFormArea && !isResultVisible) {
+                floatingPriceBar.classList.remove('translate-y-full');
+            } else {
+                floatingPriceBar.classList.add('translate-y-full');
+            }
+        });
+
+        // Logic to toggle Client Type
+        function toggleClientType() {
+            const clientType = document.querySelector('input[name="clientType"]:checked')?.value;
+            const planInputs = document.querySelectorAll('input[name="plan"]');
+
+            if (clientType === 'corporate') {
+                companyField.classList.remove('hidden');
+                document.querySelector('input[name="companyName"]').required = true;
+                
+                planSelectionContainer.classList.add('hidden');
+                corporateMessage.classList.remove('hidden');
+                planInputs.forEach(r => r.required = false);
+            } else {
+                companyField.classList.add('hidden');
+                document.querySelector('input[name="companyName"]').required = false;
+
+                planSelectionContainer.classList.remove('hidden');
+                corporateMessage.classList.add('hidden');
+                planInputs.forEach(r => r.required = true);
+            }
+        }
+
+        // Logic to toggle Customize Options based on selected plan
+        function toggleCustomizeOptions() {
+            const plan = document.querySelector('input[name="plan"]:checked')?.value;
+            const clientType = document.querySelector('input[name="clientType"]:checked')?.value;
+
+            if (clientType === 'corporate' || !plan) {
+                customizeOptionsContainer.classList.add('hidden');
+                return;
+            }
+
+            customizeOptionsContainer.classList.remove('hidden');
+            
+            const customBasic = document.getElementById('custom-basic');
+            const customStandard = document.getElementById('custom-standard');
+            const customPremium = document.getElementById('custom-premium');
+
+            customBasic.classList.add('hidden');
+            customStandard.classList.add('hidden');
+            customPremium.classList.add('hidden');
+
+            if (plan === 'basic') customBasic.classList.remove('hidden');
+            if (plan === 'standard') customStandard.classList.remove('hidden');
+            if (plan === 'premium') customPremium.classList.remove('hidden');
+        }
+
+        // Logic to toggle Reference Data Options
+        function toggleReferenceDataOptions() {
+            const type = document.querySelector('input[name="referenceDataType"]:checked')?.value;
+            const urlContainer = document.getElementById('ref-url-container');
+            const laterContainer = document.getElementById('ref-later-container');
+            const urlInput = document.querySelector('input[name="referenceDataUrl"]');
+            const timingInput = document.querySelector('input[name="referenceDataTiming"]');
+
+            if (type === 'url') {
+                urlContainer.classList.remove('hidden');
+                laterContainer.classList.add('hidden');
+                urlInput.required = true;
+                timingInput.required = false;
+                timingInput.value = '';
+            } else if (type === 'later') {
+                urlContainer.classList.add('hidden');
+                laterContainer.classList.remove('hidden');
+                urlInput.required = false;
+                urlInput.value = '';
+                timingInput.required = true;
+            }
+        }
+
+        // Logic to toggle Contact Info
+        function toggleContactInfo() {
+            const method = document.querySelector('input[name="contactMethod"]:checked')?.value;
+            
+            document.getElementById('contact-discord-info').classList.add('hidden');
+            document.getElementById('contact-email-info').classList.add('hidden');
+            document.getElementById('contact-twitter-info').classList.add('hidden');
+            document.getElementById('contact-other-info').classList.add('hidden');
+            
+            const emailInput = document.querySelector('input[name="contactEmail"]');
+            const otherInput = document.querySelector('input[name="contactOther"]');
+            emailInput.required = false;
+            otherInput.required = false;
+
+            if (method === 'discord') {
+                document.getElementById('contact-discord-info').classList.remove('hidden');
+            } else if (method === 'email') {
+                document.getElementById('contact-email-info').classList.remove('hidden');
+                emailInput.required = true;
+            } else if (method === 'twitter') {
+                document.getElementById('contact-twitter-info').classList.remove('hidden');
+            } else if (method === 'other') {
+                document.getElementById('contact-other-info').classList.remove('hidden');
+                otherInput.required = true;
+            }
+        }
+
+        // Logic to toggle Payment Details
+        function togglePaymentDetails() {
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+            const tsunaguOptions = document.getElementById('tsunagu-options');
+            const tsunaguRadios = document.querySelectorAll('input[name="tsunaguPaymentMethod"]');
+            
+            if (paymentMethod === 'bank_transfer') {
+                bankDetails.classList.remove('hidden');
+                document.querySelector('input[name="transferName"]').required = true;
+                document.querySelector('input[name="transferDate"]').required = true;
+                
+                tsunaguOptions.classList.add('hidden');
+                tsunaguRadios.forEach(r => { r.required = false; r.checked = false; });
+            } else if (paymentMethod === 'tsunagu') {
+                bankDetails.classList.add('hidden');
+                document.querySelector('input[name="transferName"]').required = false;
+                document.querySelector('input[name="transferDate"]').required = false;
+                
+                tsunaguOptions.classList.remove('hidden');
+                tsunaguRadios.forEach(r => r.required = true);
+            } else {
+                bankDetails.classList.add('hidden');
+                document.querySelector('input[name="transferName"]').required = false;
+                document.querySelector('input[name="transferDate"]').required = false;
+                
+                tsunaguOptions.classList.add('hidden');
+                tsunaguRadios.forEach(r => { r.required = false; r.checked = false; });
+            }
+        }
+
+        // Logic to toggle Commercial Details
+        function toggleCommercialDetails() {
+            const isCommercial = document.querySelector('input[name="isCommercial"]').checked;
+            const detailsContainer = document.getElementById('commercial-details-container');
+            const detailsInput = document.querySelector('textarea[name="commercialDetails"]');
+
+            if (isCommercial) {
+                detailsContainer.classList.remove('hidden');
+                detailsInput.required = true;
+            } else {
+                detailsContainer.classList.add('hidden');
+                detailsInput.required = false;
+                detailsInput.value = '';
+            }
+        }
+
+        // Calculate Estimated Price
+        function calculateEstimate() {
+            const clientType = document.querySelector('input[name="clientType"]:checked')?.value;
+            const plan = document.querySelector('input[name="plan"]:checked')?.value;
+            
+            let total = 0;
+            let isCorporate = (clientType === 'corporate');
+            let showNote = false;
+
+            if (isCorporate) {
+                estPriceDisplay.textContent = "要お見積もり";
+                priceUnit.classList.add('hidden');
+                floatingPriceDisplay.textContent = "要お見積もり";
+                floatingPriceUnit.classList.add('hidden');
+                priceNote.classList.add('hidden');
+                return; // 企業の場合は計算終了
+            }
+
+            // 個人様向け計算
+            priceUnit.classList.remove('hidden');
+            floatingPriceUnit.classList.remove('hidden');
+
+            let basePrice = 0;
+            let customPrice = 0;
+            let optionsPrice = 0;
+            let multiplier = 1;
+
+            if (plan === 'basic') {
+                basePrice = 15000;
+                customPrice += parseInt(document.querySelector('input[name="customBgBasic"]:checked')?.value || 0);
+            } else if (plan === 'standard') {
+                basePrice = 35000;
+                customPrice += parseInt(document.querySelector('input[name="customBgStandard"]:checked')?.value || 0);
+                if (document.querySelector('input[name="customPoseStandard"]').checked) {
+                    customPrice += parseInt(document.querySelector('input[name="customPoseStandard"]').value);
+                }
+            } else if (plan === 'premium') {
+                basePrice = 60000;
+                customPrice += parseInt(document.querySelector('input[name="customBgPremium"]:checked')?.value || 0);
+                if (document.querySelector('input[name="customPosePremium"]').checked) {
+                    customPrice += parseInt(document.querySelector('input[name="customPosePremium"]').value);
+                }
+            }
+
+            // 共通オプション
+            const selectedOptions = Array.from(document.querySelectorAll('input[name="options"]:checked')).map(el => el.value);
+            
+            if (selectedOptions.includes('addPerson')) optionsPrice += 10000;
+            if (selectedOptions.includes('diffFace')) optionsPrice += 1000;
+            if (selectedOptions.includes('addPose')) optionsPrice += 8000;
+            if (selectedOptions.includes('complex')) optionsPrice += 5000;
+            if (selectedOptions.includes('charDesign')) optionsPrice += 15000;
+
+            if (selectedOptions.includes('copyright')) multiplier += 1;
+            if (selectedOptions.includes('private')) multiplier += 1;
+
+            if (plan) {
+                total = (basePrice + customPrice + optionsPrice) * multiplier;
+            }
+
+            // つなぐ手数料計算
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+            if (paymentMethod === 'tsunagu' && total > 0) {
+                const tsunaguMethod = document.querySelector('input[name="tsunaguPaymentMethod"]:checked')?.value;
+                if (tsunaguMethod === 'bank') {
+                    total = Math.floor(total * 1.028) + 390;
+                } else if (tsunaguMethod === 'credit') {
+                    total = Math.floor(total * 1.055) + 390;
+                }
+            }
+
+            estPriceDisplay.textContent = total.toLocaleString();
+            floatingPriceDisplay.textContent = total.toLocaleString();
+
+            if (multiplier > 1 || selectedOptions.length > 0 || customPrice !== 0) {
+                 priceNote.classList.remove('hidden');
+            } else {
+                 priceNote.classList.add('hidden');
+            }
+        }
+
+        // Generate Text for Copying
+        function generateText() {
+            const formData = new FormData(form);
+            const getVal = (name) => formData.get(name) || '未入力/未選択';
+            
+            const scheduleMap = {
+                '2026-07': '2026年7月着手・7月末納品',
+                '2026-09': '2026年9月着手・9月末納品',
+                '2026-10': '2026年10月着手〜'
+            };
+            const clientTypeMap = { 'individual': '個人', 'corporate': '企業・法人' };
+            const clientType = getVal('clientType');
+
+            let text = `【イラスト制作 お見積もり・ご依頼】\n\n`;
+            text += `[スケジュール]\n希望着手月: ${scheduleMap[getVal('schedule')]}\n\n`;
+            text += `[ご依頼内容]\n区分: ${clientTypeMap[clientType]}\n`;
+
+            if (clientType === 'individual') {
+                const planMap = { 'basic': 'おてがるプラン', 'standard': 'スタンダードプラン', 'premium': 'プレミアムプラン' };
+                const plan = getVal('plan');
+                text += `プラン: ${planMap[plan] || '未選択'}\n`;
+                
+                // カスタマイズ抽出
+                let customText = [];
+                if (plan === 'basic') {
+                    const bg = getVal('customBgBasic');
+                    if (bg === '5000') customText.push('背景：スタンダードくらいに変更');
+                    if (bg === '15000') customText.push('背景：プレミアムくらいに変更');
+                } else if (plan === 'standard') {
+                    const bg = getVal('customBgStandard');
+                    if (bg === '-5000') customText.push('背景：おてがるくらいに変更');
+                    if (bg === '5000') customText.push('背景：プレミアムくらいに変更');
+                    if (formData.get('customPoseStandard')) customText.push('ポーズ差分なし');
+                } else if (plan === 'premium') {
+                    const bg = getVal('customBgPremium');
+                    if (bg === '-10000') customText.push('背景：おてがるくらいに変更');
+                    if (bg === '-5000') customText.push('背景：スタンダードくらいに変更');
+                    if (formData.get('customPosePremium')) customText.push('ポーズ差分なし');
+                }
+                if (customText.length > 0) {
+                    text += `プランカスタマイズ: ${customText.join(' / ')}\n`;
+                }
+
+                // 共通オプション抽出
+                let optionsText = Array.from(formData.getAll('options')).map(val => {
+                    const map = {
+                        'addPerson': '人物追加', 
+                        'diffFace': '表情差分', 
+                        'addPose': 'ポーズ追加',
+                        'complex': '複雑な装飾・小物、衣装差分', 
+                        'charDesign': 'キャラクターデザインから依頼',
+                        'copyright': '著作権譲渡', 
+                        'private': '実績非公開'
+                    };
+                    return map[val];
+                }).join(' / ') || 'なし';
+                text += `オプション: ${optionsText}\n\n`;
+            } else {
+                text += `※企業・法人様 個別見積もり希望\n\n`;
+            }
+
+            text += `[お客様情報]\nお名前: ${getVal('name')}\n`;
+            if(clientType === 'corporate') text += `会社名: ${getVal('companyName')}\n`;
+            text += `SNS/HP URL: ${getVal('snsUrl')}\n`;
+            
+            let referenceText = '';
+            if (getVal('referenceDataType') === 'url') {
+                referenceText = getVal('referenceDataUrl');
+            } else if (getVal('referenceDataType') === 'later') {
+                referenceText = `後日提出予定 (提出時期: ${getVal('referenceDataTiming')})`;
+            }
+            text += `資料URL: ${referenceText}\n`;
+            
+            text += `使用用途: ${getVal('usage')}\n`;
+            
+            const isCommercial = document.querySelector('input[name="isCommercial"]').checked;
+            if (isCommercial) {
+                text += `商用利用: 希望する\n`;
+                text += `商用利用の詳細:\n${getVal('commercialDetails')}\n\n`;
+            } else {
+                text += `商用利用: 希望しない\n\n`;
+            }
+
+            text += `ご依頼の詳細:\n${getVal('details')}\n\n`;
+            text += `作品公開予定日: ${getVal('publishDate')}\n`;
+            text += `サイズ・解像度: ${getVal('sizeResolution')}\n`;
+
+            const contactMap = { 'discord': 'Discord', 'email': 'メール', 'twitter': 'X(Twitter)DM', 'other': 'その他' };
+            let contactText = contactMap[getVal('contactMethod')];
+            if (getVal('contactMethod') === 'email') contactText += ` (${getVal('contactEmail')})`;
+            if (getVal('contactMethod') === 'other') contactText += ` (${getVal('contactOther')})`;
+            text += `連絡方法: ${contactText}\n\n`;
+            
+            const paymentMap = { 'bank_transfer': '指定口座振り込み（ゆうちょ銀行）', 'tsunagu': '仲介サイト「つなぐ」' };
+            let paymentText = paymentMap[getVal('paymentMethod')];
+            text += `[お支払い]\n方法: ${paymentText}\n`;
+            if(getVal('paymentMethod') === 'bank_transfer') {
+                text += `振込名義: ${getVal('transferName')}\n振込予定日: ${getVal('transferDate')}\n`;
+            } else if (getVal('paymentMethod') === 'tsunagu') {
+                const tsunaguMap = { 'bank': '銀行振込', 'credit': 'クレカ／コンビニ決済' };
+                if (getVal('tsunaguPaymentMethod') !== '未入力/未選択') {
+                    text += `決済手段: ${tsunaguMap[getVal('tsunaguPaymentMethod')]}\n`;
+                }
+            }
+            
+            text += `\n[備考]\n${getVal('notes')}\n\n`;
+            
+            if (clientType === 'individual') {
+                text += `概算見積もり額: ${estPriceDisplay.textContent}円〜\n`;
+            }
+            text += `規約同意: 完了`;
+
+            generatedTextArea.value = text;
+        }
+
+        // Validate Form and update Progress
+        function checkFormValidity() {
+            const requiredElements = Array.from(form.querySelectorAll('[required]')).filter(el => {
+                // 隠れている要素のrequiredは計算に含めないための簡易チェック
+                // （実際には非表示時にrequiredを外しているため基本的にはOK）
+                return !el.closest('.hidden');
+            });
+            
+            const uniqueRequiredNames = new Set();
+            requiredElements.forEach(el => {
+                uniqueRequiredNames.add(el.name);
+            });
+            
+            let actualFilledCount = 0;
+            uniqueRequiredNames.forEach(name => {
+                const el = form.querySelector(`[name="${name}"]`);
+                if(el) {
+                    if (el.type === 'radio' || el.type === 'checkbox') {
+                        if(document.querySelector(`input[name="${name}"]:checked`)) actualFilledCount++;
+                    } else if (el.value.trim() !== '') {
+                        actualFilledCount++;
+                    }
+                }
+            });
+
+            const progress = (actualFilledCount / (uniqueRequiredNames.size || 1)) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            if (form.checkValidity()) {
+                generateText();
+            }
+        }
+
+        // Form Event Listeners
+        form.addEventListener('change', () => {
+            toggleClientType();
+            toggleCustomizeOptions();
+            toggleReferenceDataOptions();
+            toggleCommercialDetails();
+            toggleContactInfo();
+            togglePaymentDetails();
+            calculateEstimate();
+            checkFormValidity();
+        });
+
+        form.addEventListener('input', checkFormValidity);
+
+        // Copy and Redirect Logic
+        copyOnlyBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if(form.checkValidity()) {
+                generateText();
+                
+                // Copy to clipboard
+                generatedTextArea.classList.remove('sr-only');
+                generatedTextArea.style.display = 'block';
+                generatedTextArea.select();
+                document.execCommand('copy');
+                generatedTextArea.style.display = 'none';
+                generatedTextArea.classList.add('sr-only');
+                
+                // Show feedback
+                copyFeedback.classList.remove('hidden');
+                
+                // Hide feedback after a few seconds
+                setTimeout(() => {
+                    copyFeedback.classList.add('hidden');
+                }, 3000);
+            } else {
+                form.reportValidity();
+            }
+        });
+
+        submitFormBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if(form.checkValidity()) {
+                generateText();
+                
+                // 仮のフォームURL（実際のものに変更してください）
+                const url = 'https://forms.gle/iAageE4p4jCACYgv9';
+                window.open(url, '_blank');
+            } else {
+                form.reportValidity();
+            }
+        });
+
+        // Initial setup
+        toggleClientType();
+        toggleCustomizeOptions();
+        toggleContactInfo();
+        toggleReferenceDataOptions();
+        toggleCommercialDetails();
+        calculateEstimate();
+        checkFormValidity();
+    </script>
+</body>
+</html>
